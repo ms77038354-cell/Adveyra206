@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ADVEYRA AI STUDIO</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="login" class="login-wrap">
+    <form id="loginForm" class="login-card">
+      <div class="brand-mark">A</div>
+      <p class="eyebrow">PRIVATE DEVELOPMENT WORKSPACE</p>
+      <h1>ADVEYRA AI STUDIO</h1>
+      <p class="muted">Sign in to your AI coding workspace.</p>
+      <label>Admin username<input id="username" autocomplete="username" required></label>
+      <label>Admin password<input id="password" type="password" autocomplete="current-password" required></label>
+      <button class="primary" type="submit">Sign in</button>
+      <p id="loginError" class="error"></p>
+    </form>
+  </div>
+
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark small">A</span><strong>ADVEYRA <span>AI STUDIO</span></strong></div>
+      <div class="top-actions"><span id="status" class="status">Checking connection…</span><button id="diagnosticsBtn" class="secondary">Diagnostics</button><button id="exportBtn" class="secondary">Export ZIP</button><button id="pushBtn" class="secondary">Push to GitHub</button><button id="logoutBtn" class="ghost">Log out</button></div>
+    </header>
+    <main class="layout">
+      <aside class="chat-panel panel">
+        <div class="panel-heading"><div><p class="eyebrow">AI DEVELOPER</p><h2>Agent Chat</h2></div><span class="online-dot"></span></div>
+        <div id="chatMessages" class="messages">
+          <div class="bubble assistant">Hi! I’m your ADVEYRA coding agent. Tell me what you want to build or change. I can inspect, create and edit project files in this workspace.</div>
+        </div>
+        <form id="chatForm" class="composer">
+          <div id="attachmentPreview" class="attachment-preview"></div>
+          <textarea id="prompt" rows="3" placeholder="Describe a website, feature, code change, or upload a screenshot…"></textarea>
+          <div class="composer-tools">
+            <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp,image/gif" multiple hidden>
+            <button id="attachImageBtn" class="ghost" type="button" title="Attach images">＋ Image</button>
+            <select id="voiceLanguage" class="voice-language" aria-label="Voice language"><option value="hi-IN">Hindi</option><option value="en-IN">English</option></select>
+            <button id="voiceBtn" class="ghost" type="button" title="Voice input">🎙 Voice</button>
+            <span id="voiceStatus" class="muted tiny"></span>
+          </div>
+          <div class="composer-footer"><span class="muted tiny">Text, image and voice instructions · Gemini API limits apply</span><button id="sendBtn" class="primary" type="submit">Send ↗</button></div>
+        </form>
+      </aside>
+      <section class="files-panel panel">
+        <div class="panel-heading"><div><p class="eyebrow">PROJECT WORKSPACE</p><h2>Files</h2></div><div class="file-actions"><button id="newFileBtn" class="ghost">New file</button><button id="newFolderBtn" class="ghost">New folder</button><button id="uploadFileBtn" class="ghost">Upload file</button><button id="importZipBtn" class="ghost">Import ZIP</button><button id="refreshFiles" class="ghost">Refresh</button><input id="uploadFileInput" type="file" hidden><input id="importZipInput" type="file" accept=".zip,application/zip" hidden></div></div>
+        <div class="bulk-tools"><label><input id="selectAllFiles" type="checkbox"> Select all</label><span id="selectedCount">0 selected</span><button id="downloadSelectedBtn" class="ghost" type="button" disabled>Download selected</button><button id="deleteSelectedBtn" class="ghost danger" type="button" disabled>Delete selected</button></div>
+        <div id="fileList" class="file-list"><p class="muted">Loading files…</p></div>
+        <div class="editor-head"><span id="currentFile">Select a file</span><div class="file-actions"><button id="renameFile" class="ghost" disabled>Rename</button><button id="deleteFile" class="ghost danger" disabled>Delete</button><button id="saveFile" class="secondary" disabled>Save file</button></div></div>
+        <textarea id="editor" class="editor" spellcheck="false" placeholder="Select a file to view or edit its contents…"></textarea>
+      </section>
+      <section class="preview-panel panel">
+        <div class="panel-heading"><div><p class="eyebrow">LOCAL PROJECT VIEW</p><h2>Preview</h2></div><button id="previewBtn" class="secondary">Preview HTML</button></div>
+        <div class="device-toolbar"><div class="device-buttons"><button class="device-btn active" data-device="desktop" type="button">Desktop</button><button class="device-btn" data-device="tablet" type="button">Tablet</button><button class="device-btn" data-device="mobile" type="button">Mobile</button></div><span id="deviceLabel" class="muted tiny">Desktop · responsive width</span><div class="zoom-tools"><button id="zoomOutBtn" class="ghost" type="button">−</button><button id="fitPreviewBtn" class="ghost" type="button">Fit</button><button id="zoomInBtn" class="ghost" type="button">＋</button><button id="fullscreenBtn" class="ghost" type="button">Fullscreen</button><button id="reloadPreviewBtn" class="ghost" type="button">↻ Reload</button></div></div>
+        <div class="preview-note">Preview saved frontend files. Switch device modes and use Fit or Fullscreen to inspect the complete viewport. Backend apps need a separately configured runtime.</div>
+        <div id="previewStage" class="preview-stage"><iframe id="preview" title="Project preview" sandbox="allow-scripts allow-forms allow-modals allow-same-origin"></iframe></div>
+        <div class="deploy-note"><strong>Deployment:</strong> Push files to GitHub; Render can auto-deploy from the connected repository. This workspace includes diagnostics and file tools, but does not expose unrestricted shell access or provision arbitrary servers.</div>
+      </section>
+    </main>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
